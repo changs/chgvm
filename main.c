@@ -4,6 +4,7 @@
 unsigned char registers[3];
 #define ACC registers[0]
 
+void show_registers();
 void check_instruction(unsigned char * instruction, FILE * pBin) {
   unsigned char arguments[2];
   switch(*instruction) {
@@ -41,8 +42,12 @@ int main(int argc, char **argv) {
     fclose(pBin);
   }
 
+  show_registers();
+  return 0;
+}
+
+void show_registers() {
   for(int i = 0; i < sizeof(registers); ++i) {
     printf("0x%02X\n", registers[i]);
   }
-  return 0;
 }
