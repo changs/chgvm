@@ -23,13 +23,13 @@ register_name
    ;
 
 instruction_mov
-   : INSTR_MOV register_name COMMA register_name SEMICOLON
-   | INSTR_MOV register_name COMMA NUMBER SEMICOLON
+   : INSTR_MOV register_name COMMA register_name
+   | INSTR_MOV register_name COMMA NUMBER
    ;
 
 instruction_add
-   : INSTR_ADD register_name COMMA register_name COMMA register_name SEMICOLON
-   | INSTR_ADD register_name COMMA register_name COMMA NUMBER SEMICOLON
+   : INSTR_ADD register_name COMMA register_name COMMA register_name
+   | INSTR_ADD register_name COMMA register_name COMMA NUMBER
    ;
 
 
@@ -38,7 +38,7 @@ instruction
    | instruction_add
    ;
 
-program: instruction
+program: instruction SEMICOLON
 
 %%
 
