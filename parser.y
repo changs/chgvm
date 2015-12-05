@@ -8,9 +8,15 @@ FILE * yyin;
 
 %}
 
-%token INSTR_MOV INSTR_ADD
-%token REG_R1 REG_R2 REG_ACC
-%token IDENTIFIER NUMBER COMMA COLON SEMICOLON
+%union {
+  int x;
+}
+
+%token<x> INSTR_MOV
+%token<x> REG_R1 REG_R2 REG_ACC
+%token<x> IDENTIFIER NUMBER COMMA COLON SEMICOLON
+
+%type<x> instruction_mov
 
 %start program
 
@@ -23,22 +29,20 @@ register_name
    ;
 
 instruction_mov
-   : INSTR_MOV register_name COMMA register_name
-   | INSTR_MOV register_name COMMA NUMBER
-   ;
-
-instruction_add
-   : INSTR_ADD register_name COMMA register_name COMMA register_name
-   | INSTR_ADD register_name COMMA register_name COMMA NUMBER
+   : INSTR_MOV register_name COMMA register_name { printf("%d %d %d",$1, $1, $3);}
+   | INSTR_MOV register_name COMMA NUMBER { printf("%02X %02X %02X\n",$1, $3, $4);}
    ;
 
 
 instruction
-   : instruction_mov
-   | instruction_add
+   : instruction_mov SEMICOLON
    ;
 
-program: instruction SEMICOLON
+program
+   : instruction
+   | program instruction 
+   ;
+
 
 %%
 

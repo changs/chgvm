@@ -17,14 +17,13 @@ NUM      [0-9]+
 {CT}     {}
 {WS}     {}
 
-"mov"    { return INSTR_MOV; }
-"add"    { return INSTR_ADD; }
+"mov"    { yylval.x=0x01; return INSTR_MOV; }
 
-"r1"    { return REG_R1; }
-"r2"    { return REG_R2; }
-"acc"   { return REG_ACC; }
+"r1"    { yylval.x=0x01; return REG_R1; }
+"r2"    { yylval.x=0x02; return REG_R2; }
+"acc"   { yylval.x=0x03; return REG_ACC; }
 
-{NUM}    { return NUMBER; }
+{NUM}    { yylval.x=atoi(yytext); return NUMBER; }
 
 ","      { return COMMA; }
 ";"      { return SEMICOLON; }
