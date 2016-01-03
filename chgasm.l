@@ -18,6 +18,7 @@ NUM      [0-9]+
 {WS}     {}
 
 "mov"    { yylval.x=0x01; return INSTR_MOV; }
+"add"    { yylval.x=0x02; return INSTR_ADD; }
 
 "r1"    { yylval.x=0x01; return REG_R1; }
 "r2"    { yylval.x=0x02; return REG_R2; }
