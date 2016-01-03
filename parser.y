@@ -17,6 +17,7 @@ FILE * yyin;
 %token<x> IDENTIFIER NUMBER COMMA COLON SEMICOLON
 
 %type<x> instruction_mov
+%type<x> register_name
 
 %start program
 
@@ -29,8 +30,8 @@ register_name
    ;
 
 instruction_mov
-   : INSTR_MOV register_name COMMA register_name { printf("%d %d %d",$1, $1, $3);}
-   | INSTR_MOV register_name COMMA NUMBER { printf("%02X %02X %02X\n",$1, $3, $4);}
+   : INSTR_MOV register_name COMMA register_name { printf("%02X %02X %02X\n", $1, $3, $4);}
+   | INSTR_MOV register_name COMMA NUMBER { printf("%02X %02X %02X\n", $1, $3, $4);}
    ;
 
 

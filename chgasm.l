@@ -21,7 +21,7 @@ NUM      [0-9]+
 
 "r1"    { yylval.x=0x01; return REG_R1; }
 "r2"    { yylval.x=0x02; return REG_R2; }
-"acc"   { yylval.x=0x03; return REG_ACC; }
+"acc"   { yylval.x=0x00; return REG_ACC; }
 
 {NUM}    { yylval.x=atoi(yytext); return NUMBER; }
 
