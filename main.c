@@ -23,7 +23,7 @@ void check_instruction(uint8_t * instruction, FILE * pBin) {
 int main(int argc, char **argv) {
   uint8_t instruction[1];
 
-  for(int i = 0; i < sizeof(registers); ++i) {
+  for(unsigned int i = 0; i < sizeof(registers); ++i) {
     registers[i] = 0;
   }
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 }
 
 void show_registers() {
-  for(int i = 0; i < sizeof(registers); ++i) {
+  for(unsigned int i = 0; i < sizeof(registers); ++i) {
     printf("0x%02X\n", registers[i]);
   }
 }
