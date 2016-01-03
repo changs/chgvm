@@ -9,19 +9,12 @@ void check_instruction(unsigned char * instruction, FILE * pBin) {
   unsigned char arguments[2];
   switch(*instruction) {
     case 1: // MOV
-      puts("MOV");
-      fread(arguments, 2, 1, pBin);
-      registers[arguments[0]] = registers[arguments[1]];
-      break;
-    case 2: // ADD
-      puts("ADD");
-      fread(arguments, 1, 1, pBin);
-      ACC = ACC + registers[arguments[0]];
-      break;
-    case 3: // MOVI
-      puts("MOVI");
       fread(arguments, 2, 1, pBin);
       registers[arguments[0]] = arguments[1];
+      break;
+    case 2: // ADD
+      fread(arguments, 1, 1, pBin);
+      ACC = ACC + registers[arguments[0]];
       break;
   }
 }
