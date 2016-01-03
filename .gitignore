@@ -2,3 +2,4 @@ parser.tab.*
 lex.yy*
 chgasm
 main
+*.bin
