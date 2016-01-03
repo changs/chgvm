@@ -36,8 +36,7 @@ instruction_mov
    ;
 
 instruction_add
-   : INSTR_ADD NUMBER { printf("%02X %02X\n", $1, $2); }
-   | INSTR_ADD register_name { printf("%02X %02X\n", $1, $2); }
+   : INSTR_ADD register_name { printf("%02X %02X\n", $1, $2); }
    ;
 
 
