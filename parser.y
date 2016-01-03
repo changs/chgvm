@@ -1,15 +1,17 @@
 %{
-
 #include <stdio.h>
+#include <stdint.h>
 
 int    yylex(void);
 void   yyerror(const char *);
 FILE * yyin;
+FILE * yyout;
+void out(uint8_t);
 
 %}
 
 %union {
-  int x;
+  uint8_t x;
 }
 
 %token<x> INSTR_MOV INSTR_ADD
@@ -31,12 +33,12 @@ register_name
    ;
 
 instruction_mov
-   : INSTR_MOV register_name COMMA register_name { printf("%02X %02X %02X\n", $1, $3, $4);}
-   | INSTR_MOV register_name COMMA NUMBER { printf("%02X %02X %02X\n", $1, $3, $4);}
+   : INSTR_MOV register_name COMMA register_name { out($1); out($3); out($4); }
+   | INSTR_MOV register_name COMMA NUMBER { out($1); out($3); out($4); }
    ;
 
 instruction_add
-   : INSTR_ADD register_name { printf("%02X %02X\n", $1, $2); }
+   : INSTR_ADD register_name { out($1); out($2); }
    ;
 
 
@@ -55,7 +57,13 @@ program
 
 void yyerror(const char * message)
 {
-   printf(message);
+    printf(message);
+}
+
+void out(uint8_t optcode)
+{
+    printf("%02X \n", optcode);
+    fwrite(&optcode, sizeof(optcode), 1, yyout);
 }
 
 int main(int argc, char **argv)
@@ -64,8 +72,10 @@ int main(int argc, char **argv)
    {
       if((yyin = fopen(argv[1], "rb")) != NULL)
       {
+         yyout = fopen("out.bin", "wb");
          yyparse();
          fclose(yyin);
+         fclose(yyout);
       }
    }
 
