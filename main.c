@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
-unsigned char registers[3];
+uint8_t registers[3];
 #define ACC registers[0]
 
 void show_registers();
-void check_instruction(unsigned char * instruction, FILE * pBin) {
-  unsigned char arguments[2];
+void check_instruction(uint8_t * instruction, FILE * pBin) {
+  uint8_t arguments[2];
   switch(*instruction) {
     case 1: // MOV
       fread(arguments, 2, 1, pBin);
@@ -20,7 +21,7 @@ void check_instruction(unsigned char * instruction, FILE * pBin) {
 }
 
 int main(int argc, char **argv) {
-  unsigned char instruction[1];
+  uint8_t instruction[1];
 
   for(int i = 0; i < sizeof(registers); ++i) {
     registers[i] = 0;
