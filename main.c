@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-uint8_t registers[3];
+uint8_t registers[3] = {0};
 #define ACC registers[0]
 
 void show_registers();
@@ -22,10 +22,6 @@ void check_instruction(uint8_t * instruction, FILE * pBin) {
 
 int main(int argc, char **argv) {
   uint8_t instruction[1];
-
-  for(unsigned int i = 0; i < sizeof(registers); ++i) {
-    registers[i] = 0;
-  }
 
   FILE * pBin;
   pBin = fopen(argv[1], "rb");
